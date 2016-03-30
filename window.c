@@ -1233,7 +1233,7 @@ window_pane_find_up(struct window_pane *wp)
 
 	edge = wp->yoff;
 	if (edge == 0)
-		edge = wp->window->sy + 1;
+		return wp; // nowrap: edge = wp->window->sy + 1;
 
 	left = wp->xoff;
 	right = wp->xoff + wp->sx;
@@ -1279,7 +1279,7 @@ window_pane_find_down(struct window_pane *wp)
 
 	edge = wp->yoff + wp->sy + 1;
 	if (edge >= wp->window->sy)
-		edge = 0;
+		return wp; // nowrap: edge = 0;
 
 	left = wp->xoff;
 	right = wp->xoff + wp->sx;
@@ -1325,7 +1325,7 @@ window_pane_find_left(struct window_pane *wp)
 
 	edge = wp->xoff;
 	if (edge == 0)
-		edge = wp->window->sx + 1;
+		return wp; // nowrap: edge = wp->window->sx + 1;
 
 	top = wp->yoff;
 	bottom = wp->yoff + wp->sy;
@@ -1371,7 +1371,7 @@ window_pane_find_right(struct window_pane *wp)
 
 	edge = wp->xoff + wp->sx + 1;
 	if (edge >= wp->window->sx)
-		edge = 0;
+		return wp; // nowrap: edge = 0;
 
 	top = wp->yoff;
 	bottom = wp->yoff + wp->sy;
